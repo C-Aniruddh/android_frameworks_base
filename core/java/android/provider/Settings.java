@@ -3256,8 +3256,9 @@ public final class Settings {
         public static final String KEY_ASSIST_ACTION = "key_assist_action";
 
         /**
-         * Action to perform when the assistant (search) key is long-pressed. (Default is 4)
-         * (See KEY_HOME_LONG_PRESS_ACTION for valid values)
+         * Show icon when stylus is used?
+         * 0 = no
+         * 1 = yes
          * @hide
          */
         public static final String KEY_ASSIST_LONG_PRESS_ACTION = "key_assist_long_press_action";
@@ -3781,11 +3782,31 @@ public final class Settings {
 	public static final String PEEK_STATE = "peek_state";
 
 	/**
-     * Whether phone vibrates when outgoing call is picked up
-     *
-     * @hide
-     */
-    public static final String VIBRATE_ON_OUTGOING_PICKUP = "vibrate_on_outgoing_pickup";
+         * Whether phone vibrates when outgoing call is picked up
+         *
+         * @hide
+         */
+        public static final String VIBRATE_ON_OUTGOING_PICKUP = "vibrate_on_outgoing_pickup";
+        /*
+         * Reminder alert on / off
+         * @hide
+         */
+        public static final String REMINDER_ALERT_ENABLED = "reminder_alert_enabled";
+
+        /**
+         * Reminder alert extras
+         *  0 = no alert
+         *  1 = alert rings once
+         *  2 = alert rings until dismissed
+         * @hide
+         */
+        public static final String REMINDER_ALERT_NOTIFY = "reminder_alert_notify";
+
+        /**
+         * Reminder alert ringer
+         * @hide
+         */
+        public static final String REMINDER_ALERT_RINGER = "reminder_alert_ringer";
 
 	
 	/**
