@@ -1197,7 +1197,7 @@ public class PackageManagerService extends IPackageManager.Stub {
                     Slog.w(TAG, "No BOOTCLASSPATH found!");
                 }
 
-                final boolean[] didDexOpt = {false};
+                boolean didDexOpt = false;
 
                 /**
                  * Ensure all external libraries have had dexopt run on them.
@@ -1212,12 +1212,13 @@ public class PackageManagerService extends IPackageManager.Stub {
                         }
                         try {
                             if (dalvik.system.DexFile.isDexOptNeeded(lib)) {
+                                alreadyDexOpted.add(lib);
+                                didDexOpt = true;
+
                                 executorService.submit(new Runnable() {
                                     @Override
                                     public void run() {
-                                        alreadyDexOpted.add(lib);
                                         mInstaller.dexopt(lib, Process.SYSTEM_UID, true);
-                                        didDexOpt[0] = true;
                                     }
                                 });
                             }
@@ -1268,11 +1269,12 @@ public class PackageManagerService extends IPackageManager.Stub {
                         }
                         try {
                             if (dalvik.system.DexFile.isDexOptNeeded(path)) {
+                                didDexOpt = true;
+
                                 executorService.submit(new Runnable() {
                                     @Override
                                     public void run() {
                                         mInstaller.dexopt(path, Process.SYSTEM_UID, true);
-                                        didDexOpt[0] = true;
                                     }
                                 });
                             }
@@ -1290,7 +1292,7 @@ public class PackageManagerService extends IPackageManager.Stub {
                     }
                 }
 
-                if (didDexOpt[0]) {
+                if (didDexOpt) {
                     File dalvikCacheDir = new File(dataDir, "dalvik-cache");
 
                     // If we had to do a dexopt of one of the previous
