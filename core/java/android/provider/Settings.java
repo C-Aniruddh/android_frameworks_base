@@ -3114,25 +3114,7 @@ public final class Settings {
          * volume rocker music track control enable/disable
          * @hide
          */
-
         public static final String VOLUME_MUSIC_CONTROL = "volume_music_control";
-
-        public static final String WAKELOCK_BLOCKING_ENABLED = "wakelock_blocking_enabled";
-
-        /**
-         * @hide
-         */
-        public static final String WAKELOCK_BLOCKING_LIST = "wakelock_blocking_list";
-
-        /**
-         * Electronic beam animation mode
-         * 0 = off,
-         * 1 = always horizontal,
-         * 2 = always vertical,
-         * 3 = dependent on orientation
-         * 4 = scale animation
-         * @hide
-         */
 
         /**
          * Swipe between quick settings and notification drawer

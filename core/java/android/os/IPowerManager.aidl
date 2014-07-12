@@ -57,7 +57,4 @@ interface IPowerManager
     int getCurrentScreenBrightnessValue();
     int getCurrentButtonBrightnessValue();
     void setButtonBrightness(int brightness);
-
-    // blocked wakelock support
-    String getSeenWakeLocks();
 }
