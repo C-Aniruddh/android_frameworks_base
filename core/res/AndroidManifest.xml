@@ -2571,7 +2571,8 @@
         </activity>
 	<activity android:name="com.android.internal.app.KattaGangActivity"
 		android:theme="@style/Theme.Wallpaper.NoTitleBar.Fullscreen"
-		android:process=":uri">
+		android:process=":ui">
+	</activity>
         <activity android:name="com.android.internal.app.DisableCarModeActivity"
                 android:theme="@style/Theme.NoDisplay"
                 android:excludeFromRecents="true"
