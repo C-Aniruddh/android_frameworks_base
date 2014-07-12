@@ -46,9 +46,9 @@ public class KattaGangActivity extends Activity {
     FrameLayout mContent;
     int mCount;
     final Handler mHandler = new Handler();
-    final static int SOLID_BGCOLOR = 0xFF000000;
+    final static int SOLID_BGCOLOR = 0xFFFFFFFF;
     final static int CLEAR_BGCOLOR = 0xC0000000;
-    final static int TEXT_COLOR = 0xFFFFFFFF;
+    final static int TEXT_COLOR = 0xFF60029;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +80,10 @@ public class KattaGangActivity extends Activity {
         final TextView letter = new TextView(this);
 
         letter.setTypeface(bold);
-        letter.setTextSize(200);
+        letter.setTextSize(300);
         letter.setTextColor(TEXT_COLOR);
         letter.setGravity(Gravity.CENTER);
-        letter.setText("7");
+        letter.setText("1");
 
         final int p = (int)(4 * metrics.density);
 
