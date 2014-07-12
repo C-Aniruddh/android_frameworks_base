@@ -3755,6 +3755,14 @@ public final class Settings {
          */
         public static final String OPPO_CAMERA_FLIP_ENABLED = "oppo_camera_flip_enable";
 
+	/**
+	 * EITHER if notification peek is enabled or disabled
+	 * 0 =disabled (default)
+	 * 1 = enabled
+	 * @hide
+	 */
+	public static final String PEEK_STATE = "peek_state";
+	
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
