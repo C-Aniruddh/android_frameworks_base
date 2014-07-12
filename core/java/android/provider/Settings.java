@@ -2614,42 +2614,6 @@ public final class Settings {
         public static final String SCREENRECORD_IN_POWER_MENU = "screenrecord_in_power_menu";
 
         /**
-         * Sets color of statusbar traffic indicator
-         * @hide
-         */
-        public static final String STATUS_BAR_TRAFFIC_COLOR = "status_bar_traffic_color";
-
-        /**
-         * Show summary of traffic.
-         * @hide
-         */
-        public static final String STATUS_BAR_TRAFFIC_SUMMARY = "status_bar_traffic_summary";
-
-        /**
-         * Hide network speed indicator when there is no traffic
-         * @hide
-         */
-        public static final String STATUS_BAR_TRAFFIC_HIDE = "status_bar_traffic_hide";
-
-        /**
-        * ToastAnimation
-        * @hide
-        */
-        public static final String TOAST_ANIMATION = "toast_animation";
-
-        /**
-         * Whether to show the network status in the status bar
-         * @hide
-         */
-        public static final String STATUS_BAR_NETWORK_STATS = "status_bar_network_stats";
-
-        /**
-         * Frequency at which stats are updated, in milliseconds
-         * @hide
-         */
-        public static final String STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL = "status_bar_network_stats_update_frequency";
-
-        /** Sprint MWI Quirk: Show message wait indicator notifications
          * Show AirplaneMode in Power Menu
          * @hide
          */
@@ -3791,14 +3755,6 @@ public final class Settings {
          */
         public static final String OPPO_CAMERA_FLIP_ENABLED = "oppo_camera_flip_enable";
 
-	/**
-	 * EITHER if notification peek is enabled or disabled
-	 * 0 =disabled (default)
-	 * 1 = enabled
-	 * @hide
-	 */
-	public static final String PEEK_STATE = "peek_state";
-	
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
