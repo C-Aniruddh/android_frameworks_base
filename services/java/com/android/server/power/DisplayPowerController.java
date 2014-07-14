@@ -389,6 +389,9 @@ final class DisplayPowerController {
     // overrule and disable brightness for buttons
     private boolean mButtonDisableBrightness = false;
 
+    // overrule and disable based on timout
+    private boolean mButtonDisabledByTimeout = false;
+
     // The last screen auto-brightness gamma.  (For printing in dump() only.)
     private float mLastScreenAutoBrightnessGamma = 1.0f;
 
@@ -1762,7 +1765,7 @@ final class DisplayPowerController {
     private int calcButtonLight() {
         int buttonBrightness = 0;
 
-        if (mButtonDisableBrightness || mHardwareKeysDisable){
+        if (mButtonDisableBrightness || mButtonDisabledByTimeout || mHardwareKeysDisable){
             buttonBrightness = 0;
         } else {
             if (mPowerRequest.useAutoBrightness){
@@ -1805,6 +1808,16 @@ final class DisplayPowerController {
     public void setButtonBrightness(int brightness){
         if (mButtonBrightnessSupport){
             mLights.getLight(LightsService.LIGHT_ID_BUTTONS).setBrightness(brightness);
+        }
+    }
+
+    public void setButtonTimout(boolean value){
+        if (mPowerRequest == null){
+            return;
+        }
+        if (mButtonBrightnessSupport){
+            mButtonDisabledByTimeout = value;
+            updateButtonLight();
         }
     }
 
