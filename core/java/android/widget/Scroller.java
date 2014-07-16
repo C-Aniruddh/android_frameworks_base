@@ -75,6 +75,7 @@ public class Scroller  {
     private int mMaxY;
 
     private int mCurrX;
+private int mcpuBoost;
     private int mCurrY;
     private long mStartTime;
     private int mDuration;
@@ -413,7 +414,7 @@ public class Scroller  {
         mDeltaY = dy;
         mDurationReciprocal = 1.0f / (float) mDuration;
 
-        mPm.cpuBoost(duration * 1000);
+        // mPm.cpuBoost(duration * 1000);
     }
 
     /**

@@ -766,7 +766,7 @@ public class OverScroller {
             if (velocity != 0) {
                 mDuration = mSplineDuration = getSplineFlingDuration(velocity);
                 totalDistance = getSplineFlingDistance(velocity);
-                mPm.cpuBoost(mDuration * 1000);
+//                mPm.cpuBoost(mDuration * 1000);
             }
 
             mSplineDistance = (int) (totalDistance * Math.signum(velocity));
