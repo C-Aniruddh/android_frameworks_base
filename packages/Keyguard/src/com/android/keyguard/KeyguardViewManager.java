@@ -465,7 +465,7 @@ public class KeyguardViewManager {
 
 	mKeyguardHost.restoreHierarchyState(mStateContainer);
 	if (mCustomImage != null) {
-	    int currentRotation - mKeyguardView.getDisplay().getRotation() * 90;
+	    int currentRotation = mKeyguardView.getDisplay().getRotation() * 90;
 	    mCustomImage = rotateBmp(mCustomImage, mLastRotation - currentRotation);
 	    mLastRotation = currentRotation;
 
