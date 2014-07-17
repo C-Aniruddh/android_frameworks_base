@@ -3081,12 +3081,6 @@ public final class Settings {
         public static final String VOLUME_MUSIC_CONTROL = "volume_music_control";
 
         /**
-         * Swipe between quick settings and notification drawer
-         * @hide
-         */
-        public static final String QUICK_SWIPE = "quick_swipe";
-
-        /**
          * What application to launch when the user click the clock in the notification bar
          * @hide
          */
