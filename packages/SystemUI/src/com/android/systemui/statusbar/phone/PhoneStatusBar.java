@@ -117,7 +117,7 @@ import com.android.systemui.statusbar.policy.ClockCenter;
 import com.android.systemui.statusbar.policy.NetworkTraffic;
 import com.android.systemui.statusbar.policy.DateView;
 import com.android.systemui.statusbar.policy.HeadsUpNotificationView;
-import com.android.systemui.statusbar.policy.KeyButttonView;
+import com.android.systemui.statusbar.policy.KeyButtonView;
 import com.android.systemui.statusbar.policy.LocationController;
 import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NotificationRowLayout;
