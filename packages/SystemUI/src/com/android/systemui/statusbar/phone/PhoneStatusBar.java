@@ -3127,7 +3127,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
 
     private final Runnable mQuickSettingsUpdater= new Runnable() {
         public void run() {
-            if isDynamicEnabled()) {
+            if (isDynamicEnabled()) {
                 // Update the settings container
                 if (mSettingsContainer != null) {
                     mSettingsContainer.updateResources();
