@@ -327,8 +327,9 @@ public NotificationData getNotifications() {
         mProvisioningObserver.onChange(false); // set up
         mContext.getContentResolver().registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.DEVICE_PROVISIONED), true,
+		mProvisioningObserver);
 
-        mGlobalsObserver.observe());
+        mGlobalsObserver.observe();
 
         mBarService = IStatusBarService.Stub.asInterface(
                 ServiceManager.getService(Context.STATUS_BAR_SERVICE));
@@ -677,12 +678,6 @@ public NotificationData getNotifications() {
 	if (mRecents != null) {
 		mRecents.toggleRecents(mDisplay, mLayoutDirecetion, getStatusBarView());
 	}
-    }
-
-    protected void toggleRecentsActivity() {
-        if (mRecents != null) {
-                mRecents.toggleRecents(mDisplay, mLayoutDirection, getStatusBarView(), mImmersiveModeStyle);
-        }
     }
 
     protected void preloadRecentTasksList() {
