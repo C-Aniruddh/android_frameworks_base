@@ -1049,7 +1049,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 triggerVirtualKeypress(KeyEvent.KEYCODE_BACK);
                 break;
             case KEY_ACTION_APP_SWITCH:
-                sendClosesSystemWindows(SYSTEM_DIALOG_REASON_RECENT_APPS);
+                sendCloseSystemWindows(SYSTEM_DIALOG_REASON_RECENT_APPS);
 		try {
 		    IStatusBarService statusbar = getStatusBarService();
 		    if (statusbar != null) {
