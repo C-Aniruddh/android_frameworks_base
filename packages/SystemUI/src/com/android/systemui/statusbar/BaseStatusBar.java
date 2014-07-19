@@ -328,7 +328,7 @@ public NotificationData getNotifications() {
         mContext.getContentResolver().registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.DEVICE_PROVISIONED), true,
 
-        mGlobalsObserver.observe();
+        mGlobalsObserver.observe());
 
         mBarService = IStatusBarService.Stub.asInterface(
                 ServiceManager.getService(Context.STATUS_BAR_SERVICE));
