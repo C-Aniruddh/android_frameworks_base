@@ -676,7 +676,7 @@ public NotificationData getNotifications() {
 
     protected void toggleRecentsActivity() {
 	if (mRecents != null) {
-		mRecents.toggleRecents(mDisplay, mLayoutDirecetion, getStatusBarView());
+		mRecents.toggleRecents(mDisplay, getStatusBarView());
 	}
     }
 
