@@ -75,7 +75,6 @@ import com.android.internal.statusbar.StatusBarIcon;
 import com.android.internal.statusbar.StatusBarIconList;
 import com.android.internal.widget.SizeAdaptiveLayout;
 import com.android.internal.util.omni.TaskUtils;
-import com.android.internal.util.omni.OmniSwitchConstants;
 import static com.android.internal.util.omni.DeviceUtils.IMMERSIVE_MODE_OFF;
 import static com.android.internal.util.omni.DeviceUtils.IMMERSIVE_MODE_FULL;
 import static com.android.internal.util.omni.DeviceUtils.IMMERSIVE_MODE_HIDE_ONLY_NAVBAR;
@@ -99,8 +98,6 @@ import com.android.systemui.statusbar.policy.activedisplay.ActiveDisplayView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.HashMap;
 
 public abstract class BaseStatusBar extends SystemUI implements
         CommandQueue.Callbacks {
@@ -232,7 +229,7 @@ public int getNotificationCount() {
 
    
 
-    private ContentObserver mSettingsObserver = new ContentObserver(mHandler) {
+    private ContentObserver mProvisioningObserver = new ContentObserver(mHandler) {
         @Override
         public void onChange(boolean selfChange) {
             final boolean provisioned = 0 != Settings.Global.getInt(
@@ -327,10 +324,9 @@ public NotificationData getNotifications() {
                 ServiceManager.checkService(DreamService.DREAM_SERVICE));
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 
-        mSettingsObserver.onChange(false); // set up
+        mProvisioningObserver.onChange(false); // set up
         mContext.getContentResolver().registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.DEVICE_PROVISIONED), true,
-                mSettingsObserver);
 
         mGlobalsObserver.observe();
 
@@ -677,48 +673,33 @@ public NotificationData getNotifications() {
         }
     };
 
-    private boolean isOmniSwitchEnabled() {
-        int settingsValue = Settings.System.getIntForUser(
-                mContext.getContentResolver(), Settings.System.RECENTS_USE_OMNISWITCH, 0
-                , UserHandle.USER_CURRENT);
-        return (settingsValue == 1);
+    protected void toggleRecentsActivity() {
+	if (mRecents != null) {
+		mRecents.toggleRecents(mDisplay, mLayoutDirecetion, getStatusBarView());
+	}
     }
 
     protected void toggleRecentsActivity() {
-        if (isOmniSwitchEnabled()){
-            Intent showIntent = new Intent(OmniSwitchConstants.ACTION_TOGGLE_OVERLAY);
-            mContext.sendBroadcastAsUser(showIntent, UserHandle.CURRENT);
-        } else {
-            if (mRecents != null) {
+        if (mRecents != null) {
                 mRecents.toggleRecents(mDisplay, mLayoutDirection, getStatusBarView(), mImmersiveModeStyle);
-            }
         }
     }
 
     protected void preloadRecentTasksList() {
-        if (!isOmniSwitchEnabled()){
-            if (mRecents != null) {
+        if (mRecents != null) {
                 mRecents.preloadRecentTasksList();
-            }
         }
     }
 
     protected void cancelPreloadingRecentTasksList() {
-        if (!isOmniSwitchEnabled()){
-            if (mRecents != null) {
+        if (mRecents != null) {
                 mRecents.cancelPreloadingRecentTasksList();
-            }
         }
     }
 
     protected void closeRecents() {
-        if (isOmniSwitchEnabled()){
-            Intent hideIntent = new Intent(OmniSwitchConstants.ACTION_HIDE_OVERLAY);
-            mContext.sendBroadcastAsUser(hideIntent, UserHandle.CURRENT);
-        } else {
-            if (mRecents != null) {
+        if (mRecents != null) {
                 mRecents.closeRecents();
-            }
         }
     }
 
