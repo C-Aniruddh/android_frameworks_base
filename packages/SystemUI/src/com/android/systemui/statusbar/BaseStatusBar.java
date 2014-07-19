@@ -676,25 +676,25 @@ public NotificationData getNotifications() {
 
     protected void toggleRecentsActivity() {
 	if (mRecents != null) {
-		mRecents.toggleRecents(mDisplay, mLayoutDirection, getStatusBarView());
+	    mRecents.toggleRecents(mDisplay, mLayoutDirection, getStatusBarView());
 	}
     }
 
     protected void preloadRecentTasksList() {
         if (mRecents != null) {
-                mRecents.preloadRecentTasksList();
+            mRecents.preloadRecentTasksList();
         }
     }
 
     protected void cancelPreloadingRecentTasksList() {
         if (mRecents != null) {
-                mRecents.cancelPreloadingRecentTasksList();
+            mRecents.cancelPreloadingRecentTasksList();
         }
     }
 
     protected void closeRecents() {
         if (mRecents != null) {
-                mRecents.closeRecents();
+            mRecents.closeRecents();
         }
     }
 
