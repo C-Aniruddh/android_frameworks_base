@@ -42,8 +42,9 @@
     <!-- Screenrecord notification action: Stop -->
     <string name="screenrecord_notif_stop">Parar</string>
 
-    <string name="quick_settings_quick_pull_down_title">Despliegue rapido</string>
-    <string name="quick_settings_quick_pull_down_message">?Le gustaria que el borde de la barra de notificaciones despliegue el pane de ajustes rapidos?</string>
+    <!-- OTS -->
+    <string name="quick_settings_quick_pull_down_title">Despliegue rápido</string>
+    <string name="quick_settings_quick_pull_down_message">¿Le gustaría que el borde de la barra de notificaciones despliegue el panel de ajustes rápidos?</string>
 
     <!-- Screenrecord notification action: show/hide pointer -->
     <string name="screenrecord_notif_pointer_on">Mostrar puntero</string>
