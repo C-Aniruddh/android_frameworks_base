@@ -3611,7 +3611,7 @@ public final class Settings {
 	 * Quick settings quick pull down option
 	 * @hide
 	 */
-	public static final String QUICK_SETTINGS_QUICK_PULLDOWN = "quick_settings_quick_pull_down";
+	public static final String QUICK_SETTINGS_QUICK_PULL_DOWN = "quick_settings_quick_pull_down";
 
         /**
           * Volume keys control cursor in text fields (default is 0)
