@@ -3607,14 +3607,11 @@ public final class Settings {
          */
         public static final String QUIET_HOURS_ACTIVE = "quiet_hours_active";
 
-        /**
-         * Quick Settings Quick Pulldown
-         *
-         * @hide
-         */
-        public static final String QS_QUICK_PULLDOWN = "qs_quick_pulldown";
-
-
+	/**
+	 * Whether to have statusbar right side pulldown. The Value is boolean (1 or 0).
+	 * @hide
+	 */
+	public static final String STATUS_BAR_QS_QUICK_PULLDOWN = "status_bar_qs_quick_pulldown";
 
         /**
           * Volume keys control cursor in text fields (default is 0)
