@@ -3608,10 +3608,10 @@ public final class Settings {
         public static final String QUIET_HOURS_ACTIVE = "quiet_hours_active";
 
 	/**
-	 * Whether to have statusbar right side pulldown. The Value is boolean (1 or 0).
+	 * Quick settings quick pull down option
 	 * @hide
 	 */
-	public static final String STATUS_BAR_QS_QUICK_PULLDOWN = "status_bar_qs_quick_pulldown";
+	public static final String QUICK_SETTINGS_QUICK_PULLDOWN = "quick_settings_quick_pull_down";
 
         /**
           * Volume keys control cursor in text fields (default is 0)
@@ -3807,6 +3807,15 @@ public final class Settings {
             PHONE_BLACKLIST_REGEX_ENABLED,
             NOTIFICATION_SOUND
         };
+
+	/**
+	 * Settings to reset on user choice. They will fall back to the default value (0).
+	 *
+	 * @hide
+	 */
+	public static final String[] SETTINGS_TO_RESET = {
+	    QUICK_SETTINGS_QUICK_PULL_DOWN
+	};
 
         // Settings moved to Settings.Secure
 

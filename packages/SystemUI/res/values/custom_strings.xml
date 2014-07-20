@@ -46,6 +46,10 @@
     <string name="screenrecord_notif_pointer_on">Show pointer</string>
     <string name="screenrecord_notif_pointer_off">Hide pointer</string>
 
+    <!-- Quick pulldown confirmation dialog -->
+    <string name="quick_settings_quick_pull_down_title">Quick pulldown</string>
+    <string name="quick_settings_quick_pull_down_message">Would you like the edge of the status bar to quick settings?</string>
+
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>
 

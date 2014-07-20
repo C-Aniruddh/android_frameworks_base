@@ -58,4 +58,6 @@
 
     <string name="toast_rotation_unlocked">Rotación de pantalla bloqueada</string>
     <string name="toast_rotation_locked">Rotación de pantalla desbloqueada</string>
+    <string name="setting_confirmation_ask_me_later">Mas tarde</string>
+    <string name="setting_confirmation_yes">Si</string>
 </resources>
