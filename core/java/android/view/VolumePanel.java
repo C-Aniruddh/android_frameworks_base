@@ -46,7 +46,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
-import android.uti.SettingConfirmationHelper;
+import android.util.SettingConfirmationHelper;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;

@@ -754,7 +754,7 @@ public class AudioService extends IAudioService.Stub {
 
             updateRingerModeAffectedStreams();
             readDockAudioSettings(cr);
-	    updateManaulSafeMediaVolume();
+	    updateManualSafeMediaVolume();
         }
 
         mVolumeKeysDefault = Settings.System.getIntForUser(cr,
