@@ -754,7 +754,7 @@ public class AudioService extends IAudioService.Stub {
 
             updateRingerModeAffectedStreams();
             readDockAudioSettings(cr);
-            updateManualSafeMediaVolume();
+	    updateManaulSafeMediaVolume();
         }
 
         mVolumeKeysDefault = Settings.System.getIntForUser(cr,
@@ -3922,8 +3922,8 @@ public class AudioService extends IAudioService.Stub {
                 Settings.System.VOLUME_KEYS_DEFAULT), false, this);
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.CUSTOM_SOUND_EFFECTS_PATH), false, this);
-            mContentResolver.registerContentObserver(Settings.System.getUriFor(
-                Settings.System.MANUAL_SAFE_MEDIA_VOLUME), false, this);
+	    mContentResolver.registerContentObserver(Settings.System.getUriFor(
+		Settings.System.SAFE_HEADSET_VOLUME), false, this);
         }
 
         @Override
@@ -3942,7 +3942,7 @@ public class AudioService extends IAudioService.Stub {
                     setRingerModeInt(getRingerMode(), false);
                 }
                 readDockAudioSettings(mContentResolver);
-                updateManualSafeMediaVolume();
+		updateManualSafeMediaVolume();
 
                 mLinkNotificationWithVolume = Settings.System.getIntForUser(mContentResolver,
                         Settings.System.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
@@ -4869,11 +4869,10 @@ public class AudioService extends IAudioService.Stub {
     }
 
     private void enforceSafeMediaVolume() {
-        // return if safe volume has been manually turned off
-        if (!mManualSafeMediaVolume) {
-            return;
-        }
-
+	// returm if safe volume has been manually turned off
+	if (!mManualSafeMediaVolume) {
+	    return;
+	}
         VolumeStreamState streamState = mStreamStates[AudioSystem.STREAM_MUSIC];
         int devices = mSafeMediaVolumeDevices;
         int i = 0;
@@ -5015,9 +5014,9 @@ public class AudioService extends IAudioService.Stub {
     }
 
     private void updateManualSafeMediaVolume() {
-        int safeMediaVolumeEnable = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.MANUAL_SAFE_MEDIA_VOLUME, 1, UserHandle.USER_CURRENT);
-        mManualSafeMediaVolume = (safeMediaVolumeEnable == 1);
-        setSafeMediaVolumeEnabled(mManualSafeMediaVolume);
-    }
+	int safeMediaVolumeEnable = Settings.System.getIntForUser(mContext.getContentResolver(),
+		Settings.System.SAFE_HEADSET_VOLUME, 0, UserHandle.USER_CURRENT);
+	mManualSafeMediaVolume = (safeMediaVolumeEnable != 1);
+	setSafeMediaVolumeEnabled(mManualSafeMediaVolume);
+     }
 }

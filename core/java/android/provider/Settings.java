@@ -2148,11 +2148,11 @@ public final class Settings {
          */
         public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
-        /**
-         * Whether to enable the built-in safe media volume for headsets
-         * @hide
-         */
-        public static final String MANUAL_SAFE_MEDIA_VOLUME = "manual_safe_media_volume";
+	/**
+	 * Safe headset volume warning option
+	 * @hide
+	 */
+	public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
         /**
          * Whether silent mode should allow vibration feedback. This is used
@@ -3814,7 +3814,8 @@ public final class Settings {
 	 * @hide
 	 */
 	public static final String[] SETTINGS_TO_RESET = {
-	    QUICK_SETTINGS_QUICK_PULL_DOWN
+	    QUICK_SETTINGS_QUICK_PULL_DOWN,
+	    SAFE_HEADSET_VOLUME
 	};
 
         // Settings moved to Settings.Secure
