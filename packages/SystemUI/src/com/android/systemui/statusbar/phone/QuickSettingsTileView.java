@@ -47,9 +47,9 @@ class QuickSettingsTileView extends FrameLayout {
     private static final String HOVER_COLOR_WHITE = "#3FFFFFFF"; // 25% white
     private static final String HOVER_COLOR_BLACK = "#3F000000"; // 25% black
 
-    private static final float DEFAULT = 1f;
+    private static final float DEFAULT = 1.0f;
     private static final float ENABLED = 0.95f;
-    private static final float DISABLED = 0.65f;
+    private static final float DISABLED = 0.85f;
     private static final float DISAPPEAR = 0.0f;
 
     private Tile mTileId;
@@ -189,11 +189,11 @@ class QuickSettingsTileView extends FrameLayout {
             setEditModeLongClickListener(null);
         } else {
             boolean temporaryEditMode = isTemporary() && enabled;
-            float scale = temporaryEditMode ? DISAPPEAR : DEFAULT;
-            animate().scaleX(scale).scaleY(scale).setListener(null);
-            setOnClickListener(temporaryEditMode? null : mOnClickListener);
-            setOnLongClickListener(temporaryEditMode? null : mOnLongClickListener);
-            if(!mVisible) { // Item has been disabled
+            setOnClickListener(temporaryEditMode ? null : mOnClickListener);
+	    setOnLongClickListener(temporaryEditMode ? null : mOnLongClickListener);
+	    float scale = temporaryEditMode ? DISAPPEAR : DEFAULT;
+	    animate().scaleX(scale).scaleY(scale).setListener(null);
+	    if(!mVisible && !isTemporary()) { // Item has been disabled
                 setVisibility(View.GONE);
             }
         }
