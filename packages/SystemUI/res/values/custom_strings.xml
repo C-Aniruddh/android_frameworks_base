@@ -48,7 +48,11 @@
 
     <!-- Quick pulldown confirmation dialog -->
     <string name="quick_settings_quick_pull_down_title">Quick pulldown</string>
-    <string name="quick_settings_quick_pull_down_message">Would you like the edge of the status bar to quick settings?</string>
+    <string name="quick_settings_quick_pull_down_message">Would youlike to pull down quick settings from the right edge of the statubar?</string>
+    
+    <!-- Double tap to sleep Gesture -->
+    <string name="double_tap_sleep_gesture_title">Double Tap to Sleep</string>
+    <string name="double_tap_sleep_gesture_message">Would you like the device to sleep by taping twice on the statusbar</string>
 
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>
@@ -138,6 +142,7 @@
 
     <!-- Content description of the data connection type DC-HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_data_connection_DC" translatable="false">DC-HSPA+</string>
+
     <!-- OTS Preferences -->
     <string name="quick_settings_quick_pull_down">@string/quick_settings_quick_pull_down_title</string>
     <string name="safe_headset_volume">Safe headset volume</string>

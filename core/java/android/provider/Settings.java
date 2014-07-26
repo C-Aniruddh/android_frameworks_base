@@ -3613,6 +3613,12 @@ public final class Settings {
 	 */
 	public static final String QUICK_SETTINGS_QUICK_PULL_DOWN = "quick_settings_quick_pull_down";
 
+	/**
+	 * Enable statusbar double tab to sleep
+	 * @hide
+	 */
+	public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+
         /**
           * Volume keys control cursor in text fields (default is 0)
           * 0 - Disabled
@@ -3815,7 +3821,8 @@ public final class Settings {
 	 */
 	public static final String[] SETTINGS_TO_RESET = {
 	    QUICK_SETTINGS_QUICK_PULL_DOWN,
-	    SAFE_HEADSET_VOLUME
+	    SAFE_HEADSET_VOLUME,
+	    DOUBLE_TAP_SLEEP_GESTURE
 	};
 
         // Settings moved to Settings.Secure
