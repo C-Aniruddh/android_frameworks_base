@@ -48,11 +48,7 @@
 
     <!-- Quick pulldown confirmation dialog -->
     <string name="quick_settings_quick_pull_down_title">Quick pulldown</string>
-    <string name="quick_settings_quick_pull_down_message">Would youlike to pull down quick settings from the right edge of the statubar?</string>
-    
-    <!-- Double tap to sleep Gesture -->
-    <string name="double_tap_sleep_gesture_title">Double Tap to Sleep</string>
-    <string name="double_tap_sleep_gesture_message">Would you like the device to sleep by taping twice on the statusbar</string>
+    <string name="quick_settings_quick_pull_down_message">Would you like to Access quick settings by pulling the right edge of the statubar?</string>
 
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>

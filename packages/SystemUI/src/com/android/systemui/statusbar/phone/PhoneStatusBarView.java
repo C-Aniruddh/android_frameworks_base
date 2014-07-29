@@ -223,15 +223,8 @@ public class PhoneStatusBarView extends PanelBar {
                         barConsumedEvent ? 1 : 0);
             }
         }
-
-	SettingConfirmationHelper helper = new SettingConfirmationHelper(mContext);
-	helper.showConfirmationDialogForSetting(
-	        mContext.getString(R.string.double_tap_sleep_gesture_title),
-		mContext.getString(R.string.double_tap_sleep_gesture_message),
-		mContext.getResources().getDrawable(R.drawable.double_tap_gesture),
-		Settings.System.DOUBLE_TAP_SLEEP_GESTURE);
 	if (Settings.System.getInt(mContext.getContentResolver(),
-		    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1)
+		    Settings.System.DOUBLE_TAP_SLEEP_STATUS_BAR, 0) == 1)
 	    mDoubleTapGesture.onTouchEvent(event);
 
         return barConsumedEvent || super.onTouchEvent(event);
