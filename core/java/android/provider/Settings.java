@@ -3637,6 +3637,13 @@ public final class Settings {
 	 */
 	public static final String DOUBLE_TAP_SLEEP_GLOWPAD = "double_tap_sleep_glowpad";
 
+	/**
+	 * Whether noise suppresession is enabled. The value is
+	 * boolean (1 or 0)
+	 * @hide
+	 */
+	public static final String NOISE_SUPPRESSION = "noise_suppression";
+
         /**
           * Volume keys control cursor in text fields (default is 0)
           * 0 - Disabled
@@ -3811,6 +3818,7 @@ public final class Settings {
             DTMF_TONE_TYPE_WHEN_DIALING,
             HEARING_AID,
             TTY_MODE,
+	    NOISE_SUPPRESSION,
             SOUND_EFFECTS_ENABLED,
             HAPTIC_FEEDBACK_ENABLED,
             POWER_SOUNDS_ENABLED,       // moved to global
