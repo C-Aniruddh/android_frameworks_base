@@ -2266,6 +2266,13 @@
         android:description="@string/permdesc_batteryStats"
         android:protectionLevel="signature|system" />
 
+    <!-- @hide Allows an Application to reset the device battery Statistics -->
+    <permission android:name="android.permission.RESET_BATTERY_STATS"
+	android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
+	android:label="@string/permlab_batteryStats"
+	android:description="@string/permdesc_batteryStats"
+	android:protectionLevel="signature|system" />
+
     <!-- Allows an application to control the backup and restore process.
     <p>Not for use by third-party applications.
          @hide pending API council -->
