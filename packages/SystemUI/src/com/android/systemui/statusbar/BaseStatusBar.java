@@ -87,12 +87,9 @@ import com.android.systemui.recent.RecentsActivity;
 import com.android.systemui.recent.TaskDescription;
 import com.android.systemui.SearchPanelView;
 import com.android.systemui.SystemUI;
-import com.android.systemui.statusbar.notification.NotificationHelper;
-import com.android.systemui.statusbar.notification.Peek;
 import com.android.systemui.statusbar.phone.KeyguardTouchDelegate;
 import com.android.systemui.statusbar.phone.PhoneStatusBar;
 import com.android.systemui.statusbar.policy.NotificationRowLayout;
-import com.android.systemui.statusbar.phone.Ticker;
 import com.android.systemui.statusbar.policy.activedisplay.ActiveDisplayView;
 
 import java.util.ArrayList;
@@ -156,44 +153,6 @@ public abstract class BaseStatusBar extends SystemUI implements
     PowerManager mPowerManager;
     protected int mRowHeight;
 
-    
-
-    
-    // Notification helper
-    protected NotificationHelper mNotificationHelper;
-
-    // Peek
-    protected Peek mPeek;
-
-    /**
-     * An interface for navigation key bars to allow status bars to signal which keys are
-     * currently of interest to the user.<br>
-     * See {@link NavigationBarView} in Phone UI for an example.
-     */
-    public interface NavigationBarCallback {
-        /**
-         * @param hints flags from StatusBarManager (NAVIGATION_HINT...) to indicate which key is
-         * available for navigation
-         * @see StatusBarManager
-         */
-        public abstract void setNavigationIconHints(int hints);
-        /**
-         * @param showMenu {@code true} when an menu key should be displayed by the navigation bar.
-         */
-        public abstract void setMenuVisibility(boolean showMenu);
-        /**
-         * @param disabledFlags flags from View (STATUS_BAR_DISABLE_...) to indicate which key
-         * is currently disabled on the navigation bar.
-         * {@see View}
-         */
-        public void setDisabledFlags(int disabledFlags);
-    };
-    private ArrayList<NavigationBarCallback> mNavigationCallbacks =
-            new ArrayList<NavigationBarCallback>();
-
-
-
-   
     // UI-specific methods
 
     /**
@@ -223,13 +182,13 @@ public abstract class BaseStatusBar extends SystemUI implements
         return mDeviceProvisioned;
     }
 
-public int getNotificationCount() {
-        return mNotificationData.size();
-    }
+
 
    
 
     private ContentObserver mProvisioningObserver = new ContentObserver(mHandler) {
+    private ContentObserver mSettingsObserver = new ContentObserver(mHandler) {
+
         @Override
         public void onChange(boolean selfChange) {
             final boolean provisioned = 0 != Settings.Global.getInt(
@@ -239,12 +198,10 @@ public int getNotificationCount() {
                 updateNotificationIcons();
             }
         }
+     };
+
     };
 
-
-public NotificationData getNotifications() {
- return mNotificationData;
- }
     private class GlobalsObserver extends ContentObserver {
         public GlobalsObserver(Handler handler) {
             super(handler);
@@ -339,12 +296,6 @@ public NotificationData getNotifications() {
         mLocale = mContext.getResources().getConfiguration().locale;
         mLayoutDirection = TextUtils.getLayoutDirectionFromLocale(mLocale);
 
-        mPeek = new Peek(this, mContext);
-        mNotificationHelper = new NotificationHelper(this, mContext);
-
-        mPeek.setNotificationHelper(mNotificationHelper);
-
-
         // Connect in to the status bar manager service
         StatusBarIconList iconList = new StatusBarIconList();
         ArrayList<IBinder> notificationKeys = new ArrayList<IBinder>();
@@ -408,20 +359,6 @@ public NotificationData getNotifications() {
         filter.addAction(Intent.ACTION_USER_SWITCHED);
         mContext.registerReceiver(mBroadcastReceiver, filter);
     }
-
- public Peek getPeekInstance() {
- if(mPeek == null) mPeek = new Peek(this, mContext);
- return mPeek;
- }
-
-
-    public PowerManager getPowerManagerInstance() {
-        if(mPowerManager == null) mPowerManager
-                = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        return mPowerManager;
-    }
-
-  
 
     public void userSwitched(int newUserId) {
         // should be overridden
@@ -864,40 +801,18 @@ public NotificationData getNotifications() {
         return new NotificationClicker(intent, pkg, tag, id);
     }
 
-    public NotificationClicker makeClicker(Intent intent) {
-    return new NotificationClicker(intent);
- }
-
- public class NotificationClicker implements View.OnClickListener {
-        private KeyguardTouchDelegate mKeyguard;
-        private PendingIntent mPendingIntent;
-        private Intent mIntent;
+    protected class NotificationClicker implements View.OnClickListener {
+        private PendingIntent mIntent;
         private String mPkg;
         private String mTag;
         private int mId;
-        private boolean mFloat;
 
         public NotificationClicker(PendingIntent intent, String pkg, String tag, int id) {
-            this();
-            mPendingIntent = intent;
+            mIntent = intent;
             mPkg = pkg;
             mTag = tag;
             mId = id;
-         }
-
-         public NotificationClicker(Intent intent) {
-             this();
-             mIntent = intent;
-         }
-
-         public NotificationClicker() {
-             mKeyguard = KeyguardTouchDelegate.getInstance(mContext);
-         }
-
-         public void makeFloating(boolean floating) {
-             mFloat = floating;
-         }
- 
+        }
 
         public void onClick(View v) {
             try {
@@ -912,41 +827,31 @@ public NotificationData getNotifications() {
             } catch (RemoteException e) {
             }
 
-           //int flags = Intent.FLAG_FLOATING_WINDOW | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-          if (mPendingIntent != null) {
+            if (mIntent != null) {
                 int[] pos = new int[2];
                 v.getLocationOnScreen(pos);
                 Intent overlay = new Intent();
                 overlay.setSourceBounds(
-                        new Rect(pos[0], pos[1], pos[0] + v.getWidth(), pos[1] + v.getHeight()));
+                        new Rect(pos[0], pos[1], pos[0]+v.getWidth(), pos[1]+v.getHeight()));
                 try {
-                    mPendingIntent.send(mContext, 0, overlay);
+                    mIntent.send(mContext, 0, overlay);
                 } catch (PendingIntent.CanceledException e) {
                     // the stack trace isn't very helpful here.  Just log the exception message.
                     Log.w(TAG, "Sending contentIntent failed: " + e);
                 }
 
-                } else if(mIntent != null) {
-                     //mIntent.addFlags(flags);
-                     mContext.startActivity(mIntent);
+                KeyguardTouchDelegate.getInstance(mContext).dismiss();
             }
 
-           if(mKeyguard.isShowingAndNotHidden()) mKeyguard.dismiss();
-
-         if(mPkg != null) { // check if we're dealing with a notification
             try {
-               mBarService.onNotificationClick(mPkg, mTag, mId);
-              } catch (RemoteException ex) {
-           // system process is dead if we're here.
-          }
+                mBarService.onNotificationClick(mPkg, mTag, mId);
+            } catch (RemoteException ex) {
+                // system process is dead if we're here.
             }
 
             // close the shade if it was open
             animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE);
             visibilityChanged(false);
-
-            // hide notification peek screen
-            mPeek.dismissNotification();
         }
     }
     /**
@@ -994,8 +899,6 @@ public NotificationData getNotifications() {
         updateExpansionStates();
         updateNotificationIcons();
 
-        mPeek.removeNotification(entry.notification);
-
         return entry.notification;
     }
 
@@ -1038,17 +941,6 @@ public NotificationData getNotifications() {
         }
         updateExpansionStates();
         updateNotificationIcons();
-
-        if (!mPowerManager.isScreenOn()) {
-            // screen off - check if peek is enabled
-            if (mNotificationHelper.isPeekEnabled()) {
-                mPeek.showNotification(entry.notification, false);
-            } else {
-                mPeek.addNotification(entry.notification);
-            }
-        } else {
-            mPeek.addNotification(entry.notification);
-        }
     }
 
     private void addNotificationViews(IBinder key, StatusBarNotification notification) {
@@ -1237,20 +1129,7 @@ public NotificationData getNotifications() {
             entry.content.setOnClickListener(listener);
         } else {
             entry.content.setOnClickListener(null);
-      
         }
-
-        if (!mPowerManager.isScreenOn()) {
-            // screen off - check if peek is enabled
-            if (mNotificationHelper.isPeekEnabled()) {
-                mPeek.showNotification(entry.notification, true);
-            } else {
-                mPeek.addNotification(entry.notification);
-            }
-        } else {
-            mPeek.addNotification(entry.notification);
-        }
-
     }
 
     protected void notifyHeadsUpScreenOn(boolean screenOn) {
