@@ -161,8 +161,15 @@ public abstract class PreferenceActivity extends ListActivity implements
      * this extra can also be specify to supply the short title to be shown for
      * that fragment.
      */
-    public static final String EXTRA_SHOW_FRAGMENT_SHORT_TITLE
-            = ":android:show_fragment_short_title";
+    public static final String EXTRA_SHOW_FRAGMENT_SHORT_TITLE = ":android:show_fragment_short_title";
+
+    // fix for title text for starting Preferencepanel in a single pane mode
+    /** @hide */
+    public static final String EXTRA_SHOW_FRAGMENT_TITLE_TEXT = ":android:show_fragment_title_text";
+
+    // fix for short title text for startPreferencePanel in a single pane mode
+    /** @hide */
+    public static final String EXTRA_SHOW_FRAGMENT_SHORT_TITLE_TEXT = ":android:show_fragment_short_title_text";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
