@@ -3644,6 +3644,11 @@ public final class Settings {
 	 */
 	public static final String NOISE_SUPPRESSION = "noise_suppression";
 
+	/**
+	 * Disable Immersive mode Messages
+	 * @hide
+	 */
+	public static final String DISABLE_IMMERSIVE_MESSAGE = "disable_immersive_message";
         /**
           * Volume keys control cursor in text fields (default is 0)
           * 0 - Disabled
@@ -3855,7 +3860,8 @@ public final class Settings {
 	 */
 	public static final String[] SETTINGS_TO_RESET = {
 	    QUICK_SETTINGS_QUICK_PULL_DOWN,
-	    SAFE_HEADSET_VOLUME
+	    SAFE_HEADSET_VOLUME,
+	    DISABLE_IMMERSIVE_MESSAGE
 	};
 
         // Settings moved to Settings.Secure

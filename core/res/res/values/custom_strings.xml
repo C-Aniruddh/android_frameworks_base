@@ -70,6 +70,10 @@
     <string name="safe_headset_warning_title">Safe headset volume</string>
     <string name="safe_headset_warning_message">Would you like to disable the recommended volume level warning?</string>
 
+   <!-- Immersive mode confirmation warning dialog -->
+    <string name="immersive_mode_confirmation_title">Immersive mode panic dialog</string>
+    <string name="immersive_mode_confirmation_message">Would you like to disable immersive mode panic dialog?</string>
+
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_resetBatteryStats">reset battery statistics</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->

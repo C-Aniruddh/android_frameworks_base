@@ -33,6 +33,7 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;
 import android.util.Slog;
+import android.util.SettingConfirmationHelper;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -346,13 +347,24 @@ public class ImmersiveModeConfirmation {
 
         @Override
         public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case SHOW:
-                    handleShow((String)msg.obj);
-                    break;
-                case HIDE:
-                    handleHide();
-                    break;
+	    SettingConfirmationHelper helper = new SettingConfirmationHelper(mContext);
+	    helper.showConfirmationDialogForSetting(
+		mContext.getString(R.string.immersive_mode_confirmation_title),
+		mContext.getString(R.string.immersive_mode_confirmation_message),
+		mContext.getResources().getDrawable(R.drawable.immersive_mode),
+		Settings.System.DISABLE_IMMERSIVE_MESSAGE);
+	    if (Settings.System.getInt(mContext.getContentResolver(),
+			Settings.System.DISABLE_IMMERSIVE_MESSAGE, 0) != 1) {
+            	switch(msg.what) {
+                    case SHOW:
+                    	handleShow((String)msg.obj);
+                    	break;
+                    case HIDE:
+                    	handleHide();
+                    	break;
+		}
+	    } else {
+		handleHide();
             }
         }
     }
