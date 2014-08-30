@@ -5848,6 +5848,13 @@ public final class Settings {
          */
         public static final String ADVANCED_REBOOT = "advanced_reboot";
 
+	/**
+	 * 'Wipe data', 'force close' options in notification panel and recent
+	 * apps list
+	 * @hide
+	 */
+	public static final String DEVELOPMENT_SHORTCUT = "development_shortcut";
+
         /**
          * Whether developer settings dare enabled.
          * @hide
@@ -5903,7 +5910,8 @@ public final class Settings {
             MOUNT_UMS_PROMPT,
             MOUNT_UMS_NOTIFY_ENABLED,
             UI_NIGHT_MODE,
-            ADVANCED_REBOOT
+            ADVANCED_REBOOT,
+	    DEVELOPMENT_SHORTCUT
         };
 
         /**
