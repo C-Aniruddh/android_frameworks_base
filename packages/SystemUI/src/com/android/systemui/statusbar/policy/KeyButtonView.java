@@ -69,8 +69,6 @@ public class KeyButtonView extends ImageView {
     AnimatorSet mPressedAnim;
     Animator mAnimateToQuiescent = new ObjectAnimator();
 
-    private boolean mPerformedLongClick;
-
     Runnable mCheckLongPress = new Runnable() {
         public void run() {
             if (isPressed()) {
@@ -80,7 +78,6 @@ public class KeyButtonView extends ImageView {
                     sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
                 } else {
                     // Just an old-fashioned ImageView
-		    mPerformedLongClick = true;
                     performLongClick();
                 }
             }
@@ -342,14 +339,13 @@ public class KeyButtonView extends ImageView {
                     }
                 } else {
                     // no key code, just a regular ImageView
-                    if (doIt && !mPerformedLongClick) {
+                    if (doIt) {
                         performClick();
                     }
                 }
                 if (supportsLongPress()) {
                     removeCallbacks(mCheckLongPress);
                 }
-		mPerformedLongClick = false;
                 break;
         }
 

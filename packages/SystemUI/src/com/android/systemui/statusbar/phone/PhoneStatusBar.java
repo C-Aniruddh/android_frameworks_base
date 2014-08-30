@@ -31,7 +31,6 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
-import android.app.ActivityOptions;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.StatusBarManager;
@@ -40,8 +39,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -74,7 +71,6 @@ import android.util.DisplayMetrics;
 import android.util.EventLog;
 import android.util.Log;
 import android.util.Pair;
-import android.util.SettingConfirmationHelper;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
@@ -134,7 +130,6 @@ import com.android.systemui.omni.StatusHeaderMachine;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.android.internal.util.omni.DeviceUtils;
 import static com.android.internal.util.omni.DeviceUtils.IMMERSIVE_MODE_OFF;
@@ -1058,55 +1053,25 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
         return mNaturalBarHeight;
     }
 
+    private boolean mRecentsLongClicked = false;
     private View.OnClickListener mRecentsClickListener = new View.OnClickListener() {
-	public void onClick(View v) {
-	    awakenDreams();
-	    toggleRecentApps();
-	}
+        public void onClick(View v) {
+            if (!mRecentsLongClicked) {
+                awakenDreams();
+                toggleRecentApps();
+            } else {
+                mRecentsLongClicked = false;
+            }
+        }
     };
 
-    private View.OnLongClickListener mRecentsLongPressListener = new View.OnLongClickListener() {
-	@Override
-	public boolean onLongClick(View v) {
-	    cancelPreloadingRecentTasksList();
-
-		final ActivityManager am =
-			(ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-			ActivityManager.RunningTaskInfo lastTask = getLastTask(am);
-
-		if (lastTask != null) {
-	    	    if (DEBUG) Log.d(TAG, "switching to " +lastTask.topActivity.getPackageName());
-	    	    final ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext,
-			   R.anim.last_app_in, R.anim.last_app_out);
-	            am.moveTaskToFront(lastTask.id, ActivityManager.MOVE_TASK_NO_USER_ACTION,
-		    	   opts.toBundle());
-		    return true;
-		}
-		return false;
-	}
-
-	private ActivityManager.RunningTaskInfo getLastTask(final ActivityManager am) {
-	    final String defaultHomePackage = resolveCurrentLauncherPackage();
-	    List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(5);
-
-	    for (int i = 1; i < tasks.size(); i++) {
-	    	String packageName = tasks.get(i).topActivity.getPackageName();
-	    	if (!packageName.equals(defaultHomePackage)
-		    	&& !packageName.equals(mContext.getPackageName())) {
-			return tasks.get(i);
-	    	}
-	    }
-
-	    return null;
-    	}
-
-	private String resolveCurrentLauncherPackage() {
-	    final Intent launcherIntent = new Intent(Intent.ACTION_MAIN)
-		     .addCategory(Intent.CATEGORY_HOME);
-	    final PackageManager pm = mContext.getPackageManager();
-	    final ResolveInfo launcherInfo = pm.resolveActivity(launcherIntent, 0);
-	    return launcherInfo.activityInfo.packageName;
-    	}
+    private View.OnLongClickListener mRecentsLongClickListener = new View.OnLongClickListener() {
+        public boolean onLongClick(View v) {
+            awakenDreams();
+            toggleLastApp();
+            mRecentsLongClicked = true;
+            return true;
+        }
     };
 
     private int mShowSearchHoldoff = 0;
@@ -1150,7 +1115,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
     private void prepareNavigationBarView() {
         mNavigationBarView.reorient();
 
-        mNavigationBarView.setListeners(mRecentsClickListener, mRecentsLongPressListener,
+        mNavigationBarView.setListeners(mRecentsClickListener, mRecentsLongClickListener,
                 mRecentsPreloadOnTouchListener, mHomeSearchActionListener);
         updateSearchPanel();
     }
