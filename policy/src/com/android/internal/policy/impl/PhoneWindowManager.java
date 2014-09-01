@@ -740,6 +740,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HARDWARE_KEYS_DISABLE), false, this,
                     UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.KILL_APP_LONGPRESS_TIMEOUT), false, this,
+                    UserHandle.USER_ALL);
 
             updateSettings();
         }
@@ -1075,6 +1078,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 launchHomeFromHotKey();
                 break;
             case KEY_ACTION_KILL_APP:
+                // Configurable timeout
+                mBackKillTimeout = Settings.System.getIntForUser(mContext.getContentResolver(),
+                        Settings.System.KILL_APP_LONGPRESS_TIMEOUT, 1500, UserHandle.USER_CURRENT);
                 mHandler.postDelayed(mKillTask, mBackKillTimeout);
                 mBackKillPending = true;
                 break;
@@ -1207,8 +1213,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 com.android.internal.R.bool.config_enableTranslucentDecor);
         mDeviceHardwareKeys = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
-        mBackKillTimeout = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_backKillTimeout);
         mOffscreenGestureSupport = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_offscreenGestureSupport);
 

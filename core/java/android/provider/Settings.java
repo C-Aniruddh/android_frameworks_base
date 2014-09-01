@@ -3740,6 +3740,12 @@ public final class Settings {
         public static final String SOFT_BACK_KILL_APP_ENABLE = "soft_back_kill_app_enable";
 
         /**
+         * Timeout of long-pressing the Back button
+         * @hide
+         */
+        public static final String KILL_APP_LONGPRESS_TIMEOUT = "kill_app_longpress_timeout";
+
+        /**
          * Emulate existance of a menu key on devices that have only soft keys
          * Using a soft menu key will behave like if a hw menu is used
          * @hide

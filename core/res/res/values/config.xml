@@ -1345,8 +1345,6 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">0</integer>
 
-    <integer name="config_backKillTimeout">1500</integer>
-
     <!-- Boolean to enable Stylus gestures -->
     <bool name="config_stylusGestures">false</bool>
 
