@@ -4030,6 +4030,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mNavigationBarView.setLeftInLandscape(navLeftInLandscape);
         }
 
+        // Update the clock location
+        updateClockLocation();
+
         int signalStyle = Settings.System.getIntForUser(resolver,
                 Settings.System.STATUS_BAR_SIGNAL_TEXT,
                 SignalClusterView.STYLE_NORMAL, mCurrentUserId);
@@ -4179,9 +4182,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             String slot = iconSlots.get(i);
             addIcon(slot, i, i, icon);
         }
-
-        // update the clock location
-        updateClockLocation();
 
         // recreate notifications.
         for (int i = 0; i < nNotifs; i++) {
